@@ -93,6 +93,7 @@ class ExamenController extends AbstractController
         $qts= $examen->getQuestion();
         $x = $note;
         $note = ($note/count($qts))*100;
+        $formations = $this->getDoctrine()->getRepository(Formation::class)->findAll();
 
         
         $message = (new \Swift_Message('Hello Email'))
@@ -112,7 +113,8 @@ class ExamenController extends AbstractController
             $mailer->send($message);
         return $this->render("examen/note.html.twig",[
             'note' => $note,
-            'x' => $x
+            'x' => $x,
+            'forms' => $formations
         ]);
     }
     /**

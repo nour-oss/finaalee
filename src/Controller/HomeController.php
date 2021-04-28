@@ -81,7 +81,8 @@ class HomeController extends AbstractController
             $reponse = $this->getDoctrine()->getRepository(Reponse::class)->findBy(['vrai' => $champ1]);
            
             return $this->render("reponse/index.html.twig", [
-                'reponses' => $reponse
+                'reponses' => $reponse,
+                'qts' => $this->getDoctrine()->getRepository(Question::class)->findAll()
             ]);
             
 
